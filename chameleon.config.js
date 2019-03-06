@@ -1,5 +1,5 @@
 // 设置静态资源的线上路径
-const publicPath = '/cml_news/dist';
+const publicPath = '..';
 // 设置api请求前缀
 const apiPrefix = '';
 
