@@ -8,7 +8,7 @@
             "url": "https://www.chameleon.com/index"
         },
         "weex": {
-            "url": "/cml_news/weex/wangyixinwen_77a8218310fcf17f2d15.js",
+            "url": "/cml_news/dist/weex/wangyixinwen_77a8218310fcf17f2d15.js",
             "query": {
                 "path": "/pages/index/index"
             }
@@ -23,7 +23,7 @@
             "url": "https://www.chameleon.com/article"
         },
         "weex": {
-            "url": "/cml_news/weex/wangyixinwen_77a8218310fcf17f2d15.js",
+            "url": "/cml_news/dist/weex/wangyixinwen_77a8218310fcf17f2d15.js",
             "query": {
                 "path": "/pages/article/article"
             }
