@@ -1,0 +1,15 @@
+<view class="tabs-container  cml-base cml-view" style="height: {{winHeight}}rpx">
+  <titleBar class=" cml-base cml-titleBar" />
+  <cml-buildin-scroller class="tabs-scroller  cml-base cml-scroller" bindscrolltobottom="_cmlEventProxy" data-eventscrolltobottom="handleScrollBottom" height="{{winHeight - 120}}">
+      <view class="pane-row  cml-base cml-view" wx:if="{{news.length}}" wx:for="{{news}}" wx:for-item="article" bindtap="_cmlEventProxy" data-eventtap="handleItemClick" data-url="{{article.url}}">
+          <view class="col-left  cml-base cml-view">
+              <text class="left-title  cml-base cml-text">{{article.title || ''}}</text>
+              <text class="left-desc  cml-base cml-text">{{article.time}} · {{article.from}}</text>
+          </view>
+          <view class="col-right  cml-base cml-view">
+              <image style="width:300rpx;height:180rpx" src="{{article.imgSrc}}" class=" cml-base cml-image" />
+          </view>
+      </view>
+  </cml-buildin-scroller>
+
+</view>

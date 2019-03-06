@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "tab-pane",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2",
+    "usingComponents": {
+        "c-toast": "/npm/cml-ui/components/c-toast/c-toast",
+        "titleBar": "./../../components/titleBar/titleBar",
+        "cml-buildin-scroller": "/npm/chameleon-ui-builtin/components/scroller/scroller"
+    }
+}

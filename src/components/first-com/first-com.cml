@@ -1,0 +1,66 @@
+<template>
+  <view class='first-com'>
+      <text class='text1'>your name is good {{name}}</text>
+    </view>
+</template>
+
+<script>
+
+class FirstCom {
+
+    props = {
+        name: {
+            type: String,
+            default: ''
+        }
+    }
+
+  data = {
+  }
+
+  computed = {
+  }
+
+  watch  = {
+  }
+
+  methods = {
+  }
+
+  beforeCreate() {
+  }
+
+  created() {
+  }
+
+  beforeMount() {
+  }
+
+  mounted() {
+  }
+
+  beforeDestroy() {
+  }
+
+  destroyed() {
+  }
+}
+
+export default new FirstCom();
+</script>
+<style>
+.first-com {
+    border: 1px solid red;
+}
+
+.first-com .text1 {
+    color: pink;
+}
+</style>
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {}
+  }
+}
+</script>

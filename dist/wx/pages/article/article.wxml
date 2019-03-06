@@ -1,0 +1,20 @@
+<cml-buildin-page class="article-container  cml-base cml-page" title="{{title}}" bindback="_cmlEventProxy" data-eventback="goback">
+  <cml-buildin-scroller wx:if="{{title}}" height="{{winHeight}}" class=" cml-base cml-scroller">
+    <text class="article-title  cml-base cml-text">{{title}}</text>
+
+    <view class="article-info  cml-base cml-view">
+        <text class="article-info-text  cml-base cml-text">文章来源：{{from}}</text>
+        <text class="article-info-text  cml-base cml-text">发布时间：{{time}}</text>
+    </view>
+
+    <view class="article-img  cml-base cml-view">
+        <image style="width:690rpx;height:400rpx" src="{{imgSrc}}" class=" cml-base cml-image" />
+    </view>
+    
+    <view class="article-content  cml-base cml-view">
+        <text class="article-content-text  cml-base cml-text">
+        {{content}}
+        </text>
+    </view>
+  </cml-buildin-scroller>
+</cml-buildin-page>

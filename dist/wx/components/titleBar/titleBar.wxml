@@ -1,0 +1,3 @@
+<view class="title-bar  cml-base cml-view">
+    <image class="title-bar-img  cml-base cml-image" src="{{imageSrc}}" />
+</view>

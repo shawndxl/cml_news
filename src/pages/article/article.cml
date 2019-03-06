@@ -1,0 +1,146 @@
+<template>
+    <page class="article-container" title="{{title}}" c-bind:back="goback">
+    <scroller
+        c-if="{{title}}"
+        height="{{winHeight}}"
+    >
+        <text class="article-title">{{title}}</text>
+
+        <view class="article-info">
+            <text class="article-info-text">文章来源：{{from}}</text>
+            <text class="article-info-text">发布时间：{{time}}</text>
+        </view>
+
+        <view class='article-img'>
+            <image style="width: 690cpx; height: 400cpx;" src="{{imgSrc}}"/>
+        </view>
+        
+        <view class='article-content'>
+            <text class='article-content-text'>
+            {{content}}
+            </text>
+        </view>
+    </scroller>
+    </page>
+</template>
+
+<script>
+import cml from 'chameleon-api';
+
+class First   {
+
+  data = {
+        winHeight: 0,
+        title: '',
+        from: '',
+        time: '',
+        imgSrc: '',
+        content: ''
+  }
+
+  computed = {
+  }
+
+  watch  = {
+  }
+
+  methods = {
+        goback() {
+            // cml.showToast({
+            //     message: 'goback'
+            // })
+        }
+  }
+
+  beforeCreate(res) {
+      const id = res.id;
+      if (!id) return;
+
+      cml.get({
+            url: '/api/articles',
+            data: {
+                id,
+            },
+        }).then(res => {
+            if (res.errno !== 0) {
+                cml.showToast({
+                    message: res.msg,
+                    duration: 2000
+                });
+                return;
+            }
+            const data = res.data;
+            this.title = data.title;
+            this.from = data.from;
+            this.time = data.time;
+            this.imgSrc = data.imgSrc || 'https://static.didialift.com/pinche/gift/resource/xf3nrmq87w-48e89cd9b298a818488d6af6228a27e5.jpeg';
+            this.content = data.content;
+        }, err => {
+            cml.showToast({
+                message: JSON.stringify(err),
+                duration: 2000
+            })
+        })
+  }
+
+  created() {
+  }
+
+  beforeMount() {
+  }
+
+  mounted() {
+    cml.getSystemInfo().then((info)=>{
+        this.winHeight = Number(info.viewportHeight)
+    })
+  }
+
+  beforeDestroy() {
+  }
+
+  destroyed() {
+  }
+}
+
+export default new First();
+</script>
+
+<style>
+.article-container {}
+.article-title {
+    padding: 30cpx;
+    font-size: 40cpx;
+}
+.article-info {
+    padding: 30cpx;
+}
+.article-info-text {
+    color: #999999;
+    font-size: 26cpx;
+}
+.article-img {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.article-content {
+    padding: 30cpx;
+    margin-bottom: 250cpx;
+}
+.article-content-text {
+    font-family: 'Pingfang SC';
+    color: #333;
+}
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+  },
+  "wx": {
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+  }
+}
+</script>

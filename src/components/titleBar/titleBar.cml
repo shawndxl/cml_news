@@ -1,0 +1,66 @@
+<template>
+    <view class='title-bar'>
+        <image class='title-bar-img' src="{{imageSrc}}"/>
+    </view>
+</template>
+
+<script>
+
+class TitleBar {
+
+  data = {
+      imageSrc: require('../../assets/images/cml-logo.png'),
+  }
+
+  computed = {
+  }
+
+  watch  = {
+  }
+
+  methods = {
+  }
+
+  beforeCreate() {
+  }
+
+  created() {
+  }
+
+  beforeMount() {
+  }
+
+  mounted() {
+  }
+
+  beforeDestroy() {
+  }
+
+  destroyed() {
+  }
+}
+
+export default new TitleBar();
+</script>
+<style>
+.title-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #19263E;
+    height: 120cpx;
+    align-items: flex-end;
+}
+.title-bar-img {
+    width: 197.1cpx;
+    height: 66.6cpx;
+    margin-bottom: 10cpx;
+}
+</style>
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {}
+  }
+}
+</script>

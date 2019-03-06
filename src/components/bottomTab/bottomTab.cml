@@ -1,0 +1,237 @@
+<template>
+  <view
+    class='tabs-container'
+    style="height: {{winHeight}}cpx"
+  >
+    <c-tab-pane
+        class='tabs-pane'
+        tabs="{{tabs}}"
+        style="height: {{winHeight-300}}cpx"
+        active-label="{{activeLabel}}"
+    >
+        <c-tab-pane-item
+            class="tabs-item"
+            style="height: {{winHeight}}cpx"
+            c-for='{{tabs}}'
+        >
+        <scroller
+            class='height'
+            c-bind:scrolltobottom="handleScrollBottom"	
+            height="{{winHeight}}"
+        >
+            <view
+                c-if='{{news.length}}'
+                c-for='{{news}}'
+                c-for-item="item1"
+                class='pane-row'
+            >
+                <view 
+                    class='col-left'
+                >
+                    <text class='left-title'>{{item1.title || '空标题'}}</text>
+                    <text class='left-desc'>来源：{{item1.from}}</text>
+                </view>
+                <view
+                    class='col-right'
+                >
+                    <image
+                        style="width: 100cpx; height: 100cpx;"
+                        src="{{imageSrc}}"
+                    />
+                </view>
+            </view>
+          <view class='bottom-blank' />
+        </scroller>
+
+      </c-tab-pane-item>
+    </c-tab-pane>
+
+    <c-tab
+        class='tabs-bar'
+        tabs="{{tabs}}"
+        c-bind:tabclick="handleTabTap"
+        active-label="{{activeLabel}}"
+        inline="{{false}}"
+    />
+  </view>
+</template>
+
+<script>
+import cml from 'chameleon-api';
+
+class BottomTab {
+  data = {
+      winHeight: 0,
+      imageSrc: require('../../assets/images/chameleon.png'),
+      testArray: (new Array(40)).fill(),
+      tabs: [{
+          label: '',
+          data: [{
+              from: '',
+              title: '',
+          }],
+      }],
+      news: [],
+      activeLabel: '',
+  }
+
+  computed = {
+  }
+
+  watch  = {
+  }
+
+  methods = {
+      getTabs() {
+        cml.get({
+            url: '/api/tabs'
+        }).then(res => {
+            if (res.errno !== 0) {
+                cml.showToast({
+                    message: res.msg,
+                    duration: 2000
+                });
+                return;
+            }
+            this.tabs = res.data;
+            if (!this.activeLabel) {
+                this.activeLabel = res.data[0].label;
+                this.getTabNews();
+            }
+        })
+      },
+      getTabNews() {
+        cml.get({
+            url: '/api/tabs/news'
+        }).then(res => {
+            if (res.errno !== 0) {
+                cml.showToast({
+                    message: res.msg,
+                    duration: 2000
+                });
+                return;
+            }
+            console.log('new data')
+            this.news = this.news.slice().concat(res.data);
+        }, err => {
+            cml.showToast({
+                message: JSON.stringify(err),
+                duration: 2000
+            })
+        })
+      },
+      handleTabTap(e){
+          console.log(e)
+          this.activeLabel = e.detail.label;
+      },
+      handleScrollBottom() {
+          this.getTabNews();
+      }
+  }
+
+  beforeCreate() {
+  }
+
+  created() {
+    
+  }
+
+  beforeMount() {
+  }
+
+    mounted (res) {
+        this.getTabs();
+        cml.getSystemInfo().then((info)=>{
+        this.winHeight = Number(info.viewportHeight)
+        })
+    }
+
+  beforeDestroy() {
+  }
+
+  destroyed() {
+  }
+}
+
+export default new BottomTab();
+</script>
+
+<style scoped>
+.tabs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 10cpx solid blue;
+}
+
+.tabs-pane {
+    z-index: 1;
+}
+
+.tabs-bar {
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0 -4px 5px rgba(0,0,0,.05);
+    border: 1px solid red;
+}
+
+.bottom-blank {
+    height: 130cpx;
+}
+.tabs-item{
+    height: 750cpx;
+}
+.pane-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    height: 250cpx;
+}
+
+.col-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 500cpx;
+    padding-left: 30cpx;
+    height: 230cpx;;
+}
+
+.col-right {
+    width: 230cpx;
+    height: 230cpx;
+    background-color: rgba(0,0,0,.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-title {
+    height: 150cpx;
+    font-size: 35cpx;
+    overflow: hidden;
+}
+.left-desc {
+    font-size: 20cpx;
+    color: #999;    
+}
+
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+        "navigationBarTitleText": "tab-pane",
+        "backgroundTextStyle": "dark",
+        "backgroundColor": "#E2E2E2",
+        "usingComponents": {
+            "c-toast": "cml-ui/components/c-toast/c-toast",    
+            "c-tab": "cml-ui/components/c-tab/c-tab",
+            "c-tab-pane": "cml-ui/components/c-tab-pane/c-tab-pane",
+            "c-tab-pane-item": "cml-ui/components/c-tab-pane-item/c-tab-pane-item"
+        }
+    }
+}
+</script>

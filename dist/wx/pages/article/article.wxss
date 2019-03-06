@@ -1,0 +1,31 @@
+.article-title {
+  padding: 30rpx;
+  font-size: 40rpx;
+}
+.article-info {
+  padding: 30rpx;
+}
+.article-info-text {
+  color: #999999;
+  font-size: 26rpx;
+}
+.article-img {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.article-content {
+  padding: 30rpx;
+  margin-bottom: 250rpx;
+}
+.article-content-text {
+  font-family: 'Pingfang SC';
+  color: #333;
+}

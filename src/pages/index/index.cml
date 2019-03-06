@@ -1,0 +1,183 @@
+<template>
+  <view
+    class='tabs-container'
+    style="height: {{winHeight}}cpx"
+  >
+    <titleBar />
+    <scroller
+        class='tabs-scroller'
+        c-bind:scrolltobottom="handleScrollBottom"	
+        height="{{winHeight - 120}}"
+    >
+        <view
+            class='pane-row'
+            c-if='{{news.length}}'
+            c-for='{{news}}'
+            c-for-item="article"
+            c-bind:tap="handleItemClick"
+            data-url="{{article.url}}"
+        >
+            <view 
+                class='col-left'
+            >
+                <text class='left-title'>{{article.title || ''}}</text>
+                <text class='left-desc'>{{article.time}} · {{article.from}}</text>
+            </view>
+            <view
+                class='col-right'
+            >
+                <image
+                    style="width: 300cpx; height: 180cpx;"
+                    src="{{article.imgSrc}}"
+                />
+            </view>
+        </view>
+    </scroller>
+
+  </view>
+</template>
+
+<script>
+import cml from 'chameleon-api';
+import utils from '../../components/utils/utils.interface'
+import articlesData from '../../data.js';
+
+class BottomTab {
+  data = {
+      winHeight: 0,
+      imgSrc: require('../../assets/images/chameleon.png'),
+      testArray: (new Array(40)).fill(),
+      news: articlesData,
+      activeLabel: '',
+  }
+
+  computed = {
+  }
+
+  watch  = {
+  }
+
+  methods = {
+      getTabNews() {
+        cml.get({
+            url: '/api/tabs/news',
+        }).then(res => {
+            if (res.errno !== 0) {
+                cml.showToast({
+                    message: '位置错误：' + res.msg,
+                    duration: 2000
+                });
+                return;
+            }
+            this.news = this.news.slice().concat(res.data);
+        }, err => {
+            cml.showToast({
+                message: '请求错误：' + JSON.stringify(err),
+                duration: 2000
+            })
+        })
+      },
+      handleItemClick(e){
+        const url = e.currentTarget.dataset.url;
+        utils.openUrl(url);
+        // cml.navigateTo({
+        //     path: '/pages/article/article',
+        //     query: {
+        //         id: id,
+        //     }
+        // })
+      },
+      handleScrollBottom() {
+        //   this.getTabNews();
+      }
+  }
+
+  beforeCreate() {
+  }
+
+  created() {
+    
+  }
+
+  beforeMount() {
+  }
+
+    mounted (res) {
+        // this.getTabNews();
+        cml.getSystemInfo().then((info)=>{
+            this.winHeight = Number(info.viewportHeight)
+        })
+    }
+
+  beforeDestroy() {
+  }
+
+  destroyed() {
+  }
+}
+
+export default new BottomTab();
+</script>
+
+<style scoped>
+.tabs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.tabs-scroller {
+    padding-bottom: 300cpx;
+}
+
+.pane-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    height: 240cpx;
+}
+
+.col-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 430cpx;
+    padding-left: 25cpx;
+    height: 180cpx;;
+}
+
+.col-right {
+    width: 300cpx;
+    height: 180cpx;
+    background-color: rgba(0,0,0,.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-title {
+    height: 150cpx;
+    font-size: 30cpx;
+    overflow: hidden;
+}
+.left-desc {
+    font-size: 20cpx;
+    color: #999;    
+}
+
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+        "navigationBarTitleText": "tab-pane",
+        "backgroundTextStyle": "dark",
+        "backgroundColor": "#E2E2E2",
+        "usingComponents": {
+            "c-toast": "cml-ui/components/c-toast/c-toast",    
+            "titleBar": "components/titleBar/titleBar"
+        }
+    }
+}
+</script>
