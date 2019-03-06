@@ -103,7 +103,6 @@ class BottomTab {
   }
 
     mounted (res) {
-        debugger;
         // this.getTabNews();
         cml.getSystemInfo().then((info)=>{
             this.winHeight = Number(info.viewportHeight)
