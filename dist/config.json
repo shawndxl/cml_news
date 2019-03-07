@@ -8,7 +8,7 @@
             "url": "https://www.chameleon.com#/"
         },
         "weex": {
-            "url": "../weex/wangyixinwen_5c84113c1bceb0e2a91f.js",
+            "url": "../weex/wangyixinwen_3c00d318b845612bfb7c.js",
             "query": {
                 "path": "/pages/index/index"
             }
@@ -23,7 +23,7 @@
             "url": "https://www.chameleon.com#/article"
         },
         "weex": {
-            "url": "../weex/wangyixinwen_5c84113c1bceb0e2a91f.js",
+            "url": "../weex/wangyixinwen_3c00d318b845612bfb7c.js",
             "query": {
                 "path": "/pages/article/article"
             }

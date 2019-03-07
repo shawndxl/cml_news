@@ -142,12 +142,13 @@ export default new BottomTab();
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 430cpx;
+    width: 420cpx;
     padding-left: 25cpx;
     height: 180cpx;;
 }
 
 .col-right {
+    margin-right: 10cpx;
     width: 300cpx;
     height: 180cpx;
     background-color: rgba(0,0,0,.05);
