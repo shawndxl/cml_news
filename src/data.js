@@ -1,7 +1,7 @@
 module.exports = [
     {
         title: 'Chameleon 官方网站',
-        from: '官方',
+        from: 'Chameleon官方',
         time: '01/01',
         url: 'https://cmljs.org',
         imgSrc: 'https://static.didialift.com/pinche/gift/resource/WX20190305-213027@2x-84a74b76713979d63698af83d3d6d798.png',
@@ -33,5 +33,12 @@ module.exports = [
         time: '01/01',
         imgSrc: 'https://static.didialift.com/pinche/gift/resource/WX20190305-211735@2x-011a9ee468621346aa7653addd6bd308.png',
         url: 'https://github.com/didi/chameleon',
-    }, 
+    },
+    {
+        title: 'Chameleon 组件官方Demo',
+        from: 'Chameleon官方',
+        time: '01/01',
+        imgSrc: 'https://static.didialift.com/pinche/gift/resource/WX20190305-211735@2x-011a9ee468621346aa7653addd6bd308.png',
+        url: 'https://cmljs.org/cml-demo/dist/web/cml-demo.html?cml_addr=https%3A%2F%2Fcmljs.org%2Fcml-demo%2Fdist%2Fweex%2Fcml-demo.js#/',        
+    } 
 ]
